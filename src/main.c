@@ -1,4 +1,5 @@
 #include <pebble.h>
+#define KEY_DATA 5
 
 static Window *window;
 static GBitmap *image;
