@@ -36,6 +36,7 @@ static void layer_update_callback(Layer *me, GContext* ctx) {
 static void window_load(Window *window) {
 	// Init the layer for display the image
   Layer *window_layer = window_get_root_layer(window);
+	//window_set_fullscreen(window, true);
   GRect bounds = layer_get_frame(window_layer);
   layer = layer_create(bounds);
   layer_set_update_proc(layer, layer_update_callback);
