@@ -1,5 +1,9 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "Button_Down": 3,
+        "Button_Select": 2,
+        "Button_Up": 1
+    },
     "capabilities": [
         ""
     ],
@@ -8,6 +12,17 @@
     "projectType": "native",
     "resources": {
         "media": [
+            {
+                "file": "images/MenuImage2.png",
+                "menuIcon": true,
+                "name": "IMAGE_MENU_2",
+                "type": "png"
+            },
+            {
+                "file": "images/MenuImage.png",
+                "name": "IMAGE_MENU",
+                "type": "png"
+            },
             {
                 "file": "images/PebblePanicHomescreen.png",
                 "name": "IMAGE_HOME",
