@@ -31,7 +31,6 @@ static void layer_update_callback(Layer *me, GContext* ctx) {
 
   graphics_draw_bitmap_in_rect(ctx, image, (GRect) { .origin = { 0, 0 }, .size = bounds.size });
 
-  graphics_draw_bitmap_in_rect(ctx, image, (GRect) { .origin = { 80, 60 }, .size = bounds.size });
 }
 
 static void window_load(Window *window) {
