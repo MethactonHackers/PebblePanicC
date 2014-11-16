@@ -9,13 +9,8 @@
     "resources": {
         "media": [
             {
-                "file": "images/EmergencyContacts.png",
-                "name": "IMAGE_EMERGENCY",
-                "type": "png"
-            },
-            {
-                "file": "images/Ambulance.png",
-                "name": "IMAGE_AMBULANCE",
+                "file": "images/PebblePanicHomescreen.png",
+                "name": "IMAGE_HOME",
                 "type": "png"
             },
             {
@@ -24,8 +19,13 @@
                 "type": "png"
             },
             {
-                "file": "images/PebblePanicHomescreen.png",
-                "name": "IMAGE_HOME",
+                "file": "images/Ambulance.png",
+                "name": "IMAGE_AMBULANCE",
+                "type": "png"
+            },
+            {
+                "file": "images/EmergencyContacts.png",
+                "name": "IMAGE_EMERGENCY",
                 "type": "png"
             }
         ]
