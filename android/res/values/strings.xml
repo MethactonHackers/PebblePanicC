@@ -3,6 +3,6 @@
 
     <string name="app_name">PebblePanicComp</string>
    
-   
+    <string name="action_settings">Settings</string>
 
 </resources>

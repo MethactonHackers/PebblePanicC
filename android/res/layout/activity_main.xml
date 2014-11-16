@@ -17,29 +17,6 @@
         android:layout_marginTop="152dp" >
     </ListView>
 
-    <EditText
-        android:id="@+id/txtContactName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listView1"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/btnAddContact"
-        android:layout_marginTop="26dp"
-        android:ems="10"
-        android:hint="FirstName LastName"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/btnChooseContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txt"
-        android:layout_below="@+id/txtContactName"
-        android:text="Choose Contact" />
-
     <Button
         android:id="@+id/btnAddContact"
         android:layout_width="wrap_content"
@@ -47,5 +24,37 @@
         android:layout_alignRight="@+id/listView1"
         android:layout_alignTop="@+id/btnChooseContact"
         android:text="Add Contact" />
+
+    <Button
+        android:id="@+id/btnChooseContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listView1"
+        android:layout_below="@+id/txtContactName"
+        android:layout_marginTop="48dp"
+        android:text="Choose Contact" />
+
+    <EditText
+        android:id="@+id/txtPhoneNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAddContact"
+        android:layout_alignLeft="@+id/btnChooseContact"
+        android:ems="10"
+        android:hint="555-555-5555"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/txtContactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtPhoneNum"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="FirstName LastName"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
     
 </RelativeLayout>
