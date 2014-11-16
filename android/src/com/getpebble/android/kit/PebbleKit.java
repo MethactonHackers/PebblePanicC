@@ -693,10 +693,7 @@ public final class PebbleKit {
          * @throws UnsupportedOperationException
          *         Thrown if data is received and this handler is not implemented.
          */
-        public void receiveData(final Context context, UUID logUuid,
-                                final Long timestamp, final Long tag,
-                                final Long data) {
-            throw new UnsupportedOperationException("UnsignedInteger handler not implemented");
+        public void receiveData(final Context context, UUID logUuid,final Long timestamp, final Long tag, final Long data) {throw new UnsupportedOperationException("UnsignedInteger handler not implemented");
 
         }
 
@@ -716,10 +713,7 @@ public final class PebbleKit {
          * @throws UnsupportedOperationException
          *         Thrown if data is received and this handler is not implemented.
          */
-        public void receiveData(final Context context, UUID logUuid,
-                                final Long timestamp, final Long tag,
-                                final byte[] data) {
-            throw new UnsupportedOperationException("Byte array handler not implemented");
+        public void receiveData(final Context context, UUID logUuid,final Long timestamp, final Long tag,final byte[] data) {throw new UnsupportedOperationException("Byte array handler not implemented");
         }
 
         /**
@@ -738,9 +732,7 @@ public final class PebbleKit {
          * @throws UnsupportedOperationException
          *         Thrown if data is received and this handler is not implemented.
          */
-        public void receiveData(final Context context, UUID logUuid,
-                                final Long timestamp, final Long tag, final int data) {
-            throw new UnsupportedOperationException("int handler not implemented");
+        public void receiveData(final Context context, UUID logUuid,final Long timestamp, final Long tag, final int data) {throw new UnsupportedOperationException("int handler not implemented");
 
         }
 
@@ -756,14 +748,11 @@ public final class PebbleKit {
          * @param tag
          *         The user-defined tag for the corresponding data log.
          */
-        public void onFinishSession(final Context context, UUID logUuid, final Long timestamp,
-                                    final Long tag) {
+        public void onFinishSession(final Context context, UUID logUuid, final Long timestamp,final Long tag) {
             // Do nothing by default
         }
 
-        private void handleReceiveDataIntent(final Context context, final Intent intent, final UUID logUuid,
-                                             final Long timestamp, final Long tag) {
-            final int dataId = intent.getIntExtra(PBL_DATA_ID, -1);
+        private void handleReceiveDataIntent(final Context context, final Intent intent, final UUID logUuid,final Long timestamp, final Long tag) { final int dataId = intent.getIntExtra(PBL_DATA_ID, -1);
             if (dataId < 0) throw new IllegalArgumentException();
 
             Log.i("pebble", "DataID: " + dataId + " LastDataID: " + lastDataId);
