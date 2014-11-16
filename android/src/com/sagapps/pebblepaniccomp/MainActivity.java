@@ -1,10 +1,8 @@
 package com.sagapps.pebblepaniccomp;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,14 +19,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.getpebble.android.kit.PebbleKit;
-import com.getpebble.android.kit.PebbleKit.PebbleDataReceiver;
-import com.getpebble.android.kit.util.PebbleDictionary;
-
 public class MainActivity extends Activity {
 
 	public static final int CONTACT_PICKER_RESULT = 1001;
+
 	private static final String DEBUG_TAG = null;
+<<<<<<< HEAD
 	private static final int KEY_BUTTON_EVENT = 0;
 	private static final int BUTTON_UP = 1;
 	private static final int BUTTON_SELECT = 2;
@@ -37,6 +33,8 @@ public class MainActivity extends Activity {
 			.fromString("044f1e24-f686-45f7-a22d-23116f8ae92c");
 	private static final String APP_UUID = "044f1e24-f686-45f7-a22d-23116f8ae92c";
 	// private static final String PREFS_NAME = "MyPrefsFile";
+=======
+>>>>>>> parent of eace66a... added ability to send sms with pebble
 
 	private Button chooseContact;
 	private Button addContact;
@@ -48,7 +46,6 @@ public class MainActivity extends Activity {
 	private ArrayList<String> contacts;
 	private ArrayList<String> contactNums;
 	private Button send;
-	private PebbleDataReceiver mReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,6 @@ public class MainActivity extends Activity {
 		contacts = new ArrayList<String>();
 		contactNums = new ArrayList<String>();
 		send = (Button) findViewById(R.id.btnSend);
-		send.setVisibility(View.GONE);
 
 		// restore prefs
 		// Context context = getActivity();
@@ -93,19 +89,19 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				mAdapter = new ArrayAdapter<String>(MainActivity.this,
-						android.R.layout.simple_list_item_1, contacts);
+				mAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, contacts);
 				lv.setAdapter(mAdapter);
 				// SharedPreferences.Editor editor = contactList.edit();
 				// Editor editor = contactList.edit();
 			}
 		});
-
+		
 		send.setOnClickListener(new View.OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+<<<<<<< HEAD
 				for (int c = 0; c < contacts.size(); c++) {
 					String phoneNo = contactNums.get(c);
 					String sms = "testing pebble panic";
@@ -119,14 +115,28 @@ public class MainActivity extends Activity {
 					} catch (Exception e) {
 						Toast.makeText(getApplicationContext(),
 								"SMS faild, please try again later!",
+=======
+				for(int c = 0; c < contactNums.size(); c++){
+				String phoneNo = contactNums.get(c);
+				String sms = "testing pebble panic";
+	 
+				  try {
+					SmsManager smsManager = SmsManager.getDefault();
+					smsManager.sendTextMessage(phoneNo, null, sms, null, null);
+					Toast.makeText(getApplicationContext(), "SMS Sent!",
+>>>>>>> parent of eace66a... added ability to send sms with pebble
 								Toast.LENGTH_LONG).show();
-						e.printStackTrace();
-					}
+				  } catch (Exception e) {
+					Toast.makeText(getApplicationContext(),
+						"SMS faild, please try again later!",
+						Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				  }
 				}
-
+				 
 			}
 		});
-
+			
 	}
 
 	@Override
@@ -173,17 +183,17 @@ public class MainActivity extends Activity {
 				contactName.setText(name);
 				contacts.add(name);
 				contactNums.add(number);
-				// Toast.makeText(getApplicationContext(), contactNums+"",
-				// Toast.LENGTH_SHORT).show();
-				// num = onlyDigits(contactPhoneNum.toString());
-				// Toast.makeText(getApplicationContext(), "fone number"+num,
-				// Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), contactNums+"", Toast.LENGTH_SHORT).show();
+				//num = onlyDigits(contactPhoneNum.toString());
+				//Toast.makeText(getApplicationContext(), "fone number"+num, Toast.LENGTH_LONG).show();
 				addContact.setVisibility(View.VISIBLE);
-
+				
 			}
 		}
 	}
+	
 
+<<<<<<< HEAD
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -244,6 +254,10 @@ public class MainActivity extends Activity {
 	// stopService(new Intent(getBaseContext(), backgroundService.class));
 	// }
 
+=======
+
+	
+>>>>>>> parent of eace66a... added ability to send sms with pebble
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
