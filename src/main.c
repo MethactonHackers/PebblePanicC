@@ -2,7 +2,6 @@
 #define BUTTON_UP 1
 #define BUTTON_SELECT 2
 #define BUTTON_DOWN 3
-#define DATA_KEY 4
 #define KEY_BUTTON_EVENT 0
 
 static Window *window;
@@ -13,33 +12,6 @@ static void in_received_handler(DictionaryIterator *iter, void *context)
 {
     
 }
-/*
-
-
-	*	Function to send a key press using a pre-agreed key
-	
-static void send_cmd(uint8_t cmd) {	//uint8_t is an unsigned 8-bit int (0 - 255)
-	//Create a key-value pair
-  Tuplet value = TupletInteger(DATA_KEY, cmd);
-  
-  //Construct the dictionary
-  DictionaryIterator *iter;
-  app_message_out_get(&iter);
-  
-  //If not constructed, do not send - return straight away
-  if (iter == NULL)
-    return;
-  
-  //Write the tuplet to the dictionary
-  dict_write_tuplet(iter, &value);
-  dict_write_end(iter);
-  
-  //Send the dictionary and release the buffer
-  app_message_out_send();
-  app_message_out_release();
-}
-
-*/
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Message received!");
@@ -57,24 +29,6 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
 }
 
-/*static void inbox_recieved_callback() {
-	 // Get the first pair
-  Tuple *t = dict_read_first(iterator);
-
-  // Process all pairs present
-  while(t != NULL) {
-    // Process this pair's key
-    switch (t->key) {
-      case KEY_DATA:
-        APP_LOG(APP_LOG_LEVEL_INFO, "KEY_DATA received with value %d", (int)t->value->int32);
-        break;
-    }
-
-    // Get next pair, if any
-    t = dict_read_next(iterator);
-  }
-};
-*/
 
 static void layer_update_callback(Layer *me, GContext* ctx) {
   // We make sure the dimensions of the GRect to draw into
