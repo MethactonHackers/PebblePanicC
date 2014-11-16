@@ -79,18 +79,13 @@ static void window_load(Window *window) {
   image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_HOME);
 	
 }
-static void window_unload(Window *window) {
-  window_destroy(window);
-	gbitmap_destroy(image);
-	layer_destroy(layer);
-}
+
 
 static void init(void) {
   window = window_create();
   window_set_click_config_provider(window, click_config_provider);
   window_set_window_handlers(window, (WindowHandlers) {
 	.load = window_load,
-    .unload = window_unload,
   });
 
 	
