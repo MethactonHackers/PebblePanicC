@@ -4,11 +4,11 @@ static Window *window;
 static TextLayer *text_layer;
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Sent message to /nEmergency Contacts");
+  text_layer_set_text(text_layer, "Sent message to \nEmergency Contacts");
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Sent message to /nAmbulance");
+  text_layer_set_text(text_layer, "Sent message to \nAmbulance");
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
