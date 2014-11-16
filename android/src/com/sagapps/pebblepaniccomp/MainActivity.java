@@ -1,14 +1,11 @@
 package com.sagapps.pebblepaniccomp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -206,28 +203,30 @@ public class MainActivity extends Activity {
 					int button = data.getUnsignedIntegerAsLong(KEY_BUTTON_EVENT).intValue();
 				
 					switch(button){
-					case BUTTON_UP:
-						Intent intent - new Intent(Intent.ACTION_CALL);
-						Toast.makeText(getApplicationContext(), "up", Toast.LENGTH_SHORT).show();
-						break;
-					
-					case BUTTON_SELECT:
-						send.performClick();
-						Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_SHORT).show();
-						break;
-					
-					case BUTTON_DOWN:
-						Toast.makeText(getApplicationContext(), "down", Toast.LENGTH_SHORT).show();
-						break;
+						case BUTTON_UP:
+							Intent intent = new Intent(Intent.ACTION_CALL);
+							Toast.makeText(getApplicationContext(), "up", Toast.LENGTH_SHORT).show();
+							break;
+						
+						case BUTTON_SELECT:
+							send.performClick();
+							Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_SHORT).show();
+							break;
+						
+						case BUTTON_DOWN:
+							Toast.makeText(getApplicationContext(), "down", Toast.LENGTH_SHORT).show();
+							break;
 					
 					}
 			
 				
 		
 				}
-	PebbleKit.registerReceivedDataHandler(this, mReceiver);
+	PebbleKit.registerReceivedDataHandler(getBaseContext(), mReceiver);
 		
-	}
+	};
+		};
+		}
 		
 
 	@Override
@@ -252,6 +251,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
