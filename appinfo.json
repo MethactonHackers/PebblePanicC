@@ -9,6 +9,21 @@
     "resources": {
         "media": [
             {
+                "file": "images/EmergencyContacts.png",
+                "name": "IMAGE_EMERGENCY",
+                "type": "png"
+            },
+            {
+                "file": "images/Ambulance.png",
+                "name": "IMAGE_AMBULANCE",
+                "type": "png"
+            },
+            {
+                "file": "images/FirePolice.png",
+                "name": "IMAGE_FIRE_POLICE",
+                "type": "png"
+            },
+            {
                 "file": "images/PebblePanicHomescreen.png",
                 "name": "IMAGE_HOME",
                 "type": "png"

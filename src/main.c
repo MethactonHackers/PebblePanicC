@@ -5,23 +5,6 @@ static TextLayer *text_layer;
 static GBitmap *image;
 static Layer *layer;
 
-static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	//image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
-}
-
-static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-	//image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
-}
-
-static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-	//image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
-}
-
-static void click_config_provider(void *context) {
-  window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
-  window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
-  window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
-}
 
 static void layer_update_callback(Layer *me, GContext* ctx) {
   // We make sure the dimensions of the GRect to draw into
@@ -31,6 +14,51 @@ static void layer_update_callback(Layer *me, GContext* ctx) {
 
   graphics_draw_bitmap_in_rect(ctx, image, (GRect) { .origin = { 0, 0 }, .size = bounds.size });
 
+}
+
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+	// Init the layer for display the image
+  Layer *window_layer = window_get_root_layer(window);
+	//window_set_fullscreen(window, true);
+  GRect bounds = layer_get_frame(window_layer);
+  layer = layer_create(bounds);
+  layer_set_update_proc(layer, layer_update_callback);
+  layer_add_child(window_layer, layer);
+
+	//Draws the Image
+	image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_EMERGENCY);
+}
+
+static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+	// Init the layer for display the image
+  Layer *window_layer = window_get_root_layer(window);
+	//window_set_fullscreen(window, true);
+  GRect bounds = layer_get_frame(window_layer);
+  layer = layer_create(bounds);
+  layer_set_update_proc(layer, layer_update_callback);
+  layer_add_child(window_layer, layer);
+
+	//Draws the Image
+	image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_AMBULANCE);
+}
+
+static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+	// Init the layer for display the image
+  Layer *window_layer = window_get_root_layer(window);
+	//window_set_fullscreen(window, true);
+  GRect bounds = layer_get_frame(window_layer);
+  layer = layer_create(bounds);
+  layer_set_update_proc(layer, layer_update_callback);
+  layer_add_child(window_layer, layer);
+
+	//Draws the Image
+	image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_FIRE_POLICE);
+}
+
+static void click_config_provider(void *context) {
+  window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
+  window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
 static void window_load(Window *window) {
@@ -65,6 +93,8 @@ static void init(void) {
 
 static void deinit(void) {
   window_destroy(window);
+	gbitmap_destroy(image);
+	layer_destroy(layer);
 }
 
 int main(void) {
