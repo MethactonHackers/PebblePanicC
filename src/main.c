@@ -1,7 +1,6 @@
 #include <pebble.h>
 
 static Window *window;
-static TextLayer *text_layer;
 static GBitmap *image;
 static Layer *layer;
 
@@ -17,6 +16,8 @@ static void layer_update_callback(Layer *me, GContext* ctx) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+	gbitmap_destroy(image);
+	layer_destroy(layer);
 	// Init the layer for display the image
   Layer *window_layer = window_get_root_layer(window);
 	//window_set_fullscreen(window, true);
@@ -30,6 +31,8 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+	gbitmap_destroy(image);
+	layer_destroy(layer);
 	// Init the layer for display the image
   Layer *window_layer = window_get_root_layer(window);
 	//window_set_fullscreen(window, true);
@@ -43,6 +46,8 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+	gbitmap_destroy(image);
+	layer_destroy(layer);
 	// Init the layer for display the image
   Layer *window_layer = window_get_root_layer(window);
 	//window_set_fullscreen(window, true);
@@ -75,7 +80,9 @@ static void window_load(Window *window) {
 	
 }
 static void window_unload(Window *window) {
-  text_layer_destroy(text_layer);
+  window_destroy(window);
+	gbitmap_destroy(image);
+	layer_destroy(layer);
 }
 
 static void init(void) {
