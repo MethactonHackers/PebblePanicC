@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "achyutreddy24@gmail.com",
+    "longName": "PebblePanic",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "shortName": "PebblePanic",
+    "uuid": "044f1e24-f686-45f7-a22d-23116f8ae92c",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
