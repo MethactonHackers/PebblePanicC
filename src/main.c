@@ -4,15 +4,15 @@ static Window *window;
 static TextLayer *text_layer;
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "S");
+  text_layer_set_text(text_layer, "Messaged Emergency Contacts");
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Up");
+  text_layer_set_text(text_layer, "Sent messege to Ambulance");
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Down");
+  text_layer_set_text(text_layer, "Called Fire and Police Departments");
 }
 
 static void click_config_provider(void *context) {
