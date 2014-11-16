@@ -7,7 +7,13 @@
     "longName": "PebblePanic",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+            {
+                "file": "images/logo237.png",
+                "name": "TEST_IMAGE",
+                "type": "png"
+            }
+        ]
     },
     "shortName": "PebblePanic",
     "uuid": "044f1e24-f686-45f7-a22d-23116f8ae92c",
