@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -188,13 +186,13 @@ public class MainActivity extends Activity {
 		super.onResume();
 
 		// Start the companion app on the watch
-		// PebbleKit.startAppOnPebble(getApplicationContext(),
+		//PebbleKit.startAppOnPebble(getApplicationContext(),
 		// "044f1e24-f686-45f7-a22d-23116f8ae92c");
 
 		mReceiver = new PebbleDataReceiver(UUID.fromString(APP_UUID)) {
 
 			@Override
-			public void receiveData(Context context, int transactionId,PebbleDictionary data) {
+			public void receiveData(final Context context, final int transactionId, final PebbleDictionary data) {
 				// TODO Auto-generated method stub
 				PebbleKit.sendAckToPebble(context, transactionId);
 
@@ -221,7 +219,7 @@ public class MainActivity extends Activity {
 				
 		
 				};
-	PebbleKit.registerReceivedDataHandler(this, mReceiver);
+	PebbleKit.registerReceivedDataHandler(context, mReceiver);
 			}
 		};
 	}
