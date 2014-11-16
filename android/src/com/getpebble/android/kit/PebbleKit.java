@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
+
+import com.getpebble.android.kit.PebbleKit.PebbleDataReceiver;
 import com.getpebble.android.kit.Constants.*;
 import com.getpebble.android.kit.util.PebbleDictionary;
 import org.json.JSONException;
@@ -923,4 +925,9 @@ public final class PebbleKit {
             return tag;
         }
     }
+
+	public static void registerReceivedDataHandler(PebbleDataReceiver pebbleDataReceiver, PebbleDataReceiver mReceiver) {
+		// TODO Auto-generated method stub
+		
+	}
 }
