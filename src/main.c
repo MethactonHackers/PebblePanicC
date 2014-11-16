@@ -43,7 +43,7 @@ static void window_load(Window *window) {
   layer_add_child(window_layer, layer);
 
 	//Draws the Image
-  image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
+  image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_HOME);
 	
 }
 static void window_unload(Window *window) {

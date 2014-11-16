@@ -9,8 +9,8 @@
     "resources": {
         "media": [
             {
-                "file": "images/logo237.png",
-                "name": "TEST_IMAGE",
+                "file": "images/PebblePanicHomescreen.png",
+                "name": "IMAGE_HOME",
                 "type": "png"
             }
         ]
