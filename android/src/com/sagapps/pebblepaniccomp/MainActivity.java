@@ -6,6 +6,7 @@ import java.util.UUID;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,8 +34,7 @@ public class MainActivity extends Activity {
 	private static final int BUTTON_UP = 1;
 	private static final int BUTTON_SELECT = 2;
 	private static final int BUTTON_DOWN = 3;
-	private static final UUID PEBBLE_APP_UUID = UUID
-			.fromString("044f1e24-f686-45f7-a22d-23116f8ae92c");
+	private static final UUID PEBBLE_APP_UUID = UUID.fromString("044f1e24-f686-45f7-a22d-23116f8ae92c");
 	private static final String APP_UUID = "044f1e24-f686-45f7-a22d-23116f8ae92c";
 	// private static final String PREFS_NAME = "MyPrefsFile";
 
@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
 	private ArrayList<String> contactNums;
 	private Button send;
 	private PebbleDataReceiver mReceiver;
+	private IntentFilter mFilter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,9 @@ public class MainActivity extends Activity {
 		contactNums = new ArrayList<String>();
 		send = (Button) findViewById(R.id.btnSend);
 		send.setVisibility(View.GONE);
+		mFilter = new IntentFilter();
+		registerReceiver(mReceiver,mFilter);
+		//PebbleKit.registerReceivedDataHandler(getApplicationContext(), mReceiver);
 
 		// restore prefs
 		// Context context = getActivity();
@@ -82,6 +86,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				registerReceiver(mReceiver,mFilter);
 				Intent i = new Intent(Intent.ACTION_PICK,
 						ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
 				startActivityForResult(i, CONTACT_PICKER_RESULT);
@@ -93,6 +98,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				registerReceiver(mReceiver,mFilter);
 				mAdapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, contacts);
 				lv.setAdapter(mAdapter);
 				// SharedPreferences.Editor editor = contactList.edit();
@@ -105,6 +111,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				registerReceiver(mReceiver,mFilter);
 				for (int c = 0; c < contacts.size(); c++) {
 					String phoneNo = contactNums.get(c);
 					String sms = "testing pebble panic";
@@ -131,6 +138,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int reqCode, int resultCode, Intent data) {
 		super.onActivityResult(reqCode, resultCode, data);
+		registerReceiver(mReceiver,mFilter);
 		if (resultCode == RESULT_OK) {
 			switch (reqCode) {
 			case CONTACT_PICKER_RESULT:
@@ -148,14 +156,12 @@ public class MainActivity extends Activity {
 					cursor = getContentResolver().query(
 							ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
 							null,
-							ContactsContract.CommonDataKinds.Phone._ID
-									+ " = ? ", new String[] { id }, null);
+							ContactsContract.CommonDataKinds.Phone._ID+ " = ? ", new String[] { id }, null);
 
 					// int numberIdx = cursor.getColumnIndex(Phone.DATA);
 
 					// Get Name
-					cursor = getContentResolver().query(result, null, null,
-							null, null);
+					cursor = getContentResolver().query(result, null, null,null, null);
 					if (cursor.moveToFirst()) {
 						name = cursor
 								.getString(cursor
@@ -186,11 +192,11 @@ public class MainActivity extends Activity {
 
 	public void onResume() {
 		super.onResume();
-
+		
 		// Start the companion app on the watch
 		// PebbleKit.startAppOnPebble(getApplicationContext(),
 		// "044f1e24-f686-45f7-a22d-23116f8ae92c");
-
+		registerReceiver(mReceiver,mFilter);
 		mReceiver = new PebbleDataReceiver(UUID.fromString(APP_UUID)) {
 
 			@Override
@@ -204,16 +210,21 @@ public class MainActivity extends Activity {
 					switch(button){
 					case BUTTON_UP:
 						Intent intent = new Intent(Intent.ACTION_CALL);
-						Toast.makeText(getApplicationContext(), "up", Toast.LENGTH_SHORT).show();
+						intent.setData(Uri.parse("tel:"+ "4848688957"));
+						startActivity(intent);
+						Toast.makeText(getApplicationContext(), "Calling Ambulance", Toast.LENGTH_SHORT).show();
 						break;
 					
 					case BUTTON_SELECT:
 						send.performClick();
-						Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), "SMS Sent", Toast.LENGTH_SHORT).show();
 						break;
 					
 					case BUTTON_DOWN:
-						Toast.makeText(getApplicationContext(), "down", Toast.LENGTH_SHORT).show();
+						Intent in = new Intent(Intent.ACTION_CALL);
+						in.setData(Uri.parse("Tel;"+"4253050213"));
+						startActivity(in);
+						Toast.makeText(getApplicationContext(), "Calling Fire and Police", Toast.LENGTH_SHORT).show();
 						break;
 					
 					}
