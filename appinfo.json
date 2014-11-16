@@ -1,8 +1,8 @@
 {
     "appKeys": {
-        "Button_Down": 3,
-        "Button_Select": 2,
-        "Button_Up": 1
+        "BUTTON_DOWN": 3,
+        "BUTTON_SELECT": 2,
+        "BUTTON_UP": 1
     },
     "capabilities": [
         ""

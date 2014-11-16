@@ -1,9 +1,45 @@
 #include <pebble.h>
-#define KEY_DATA 5
+#define BUTTON_UP 1
+#define BUTTON_SELECT 2
+#define BUTTON_DOWN 3
+#define DATA_KEY 4
+#define KEY_BUTTON_EVENT 0
 
 static Window *window;
 static GBitmap *image;
 static Layer *layer;
+
+static void in_received_handler(DictionaryIterator *iter, void *context) 
+{
+    
+}
+/*
+
+
+	*	Function to send a key press using a pre-agreed key
+	
+static void send_cmd(uint8_t cmd) {	//uint8_t is an unsigned 8-bit int (0 - 255)
+	//Create a key-value pair
+  Tuplet value = TupletInteger(DATA_KEY, cmd);
+  
+  //Construct the dictionary
+  DictionaryIterator *iter;
+  app_message_out_get(&iter);
+  
+  //If not constructed, do not send - return straight away
+  if (iter == NULL)
+    return;
+  
+  //Write the tuplet to the dictionary
+  dict_write_tuplet(iter, &value);
+  dict_write_end(iter);
+  
+  //Send the dictionary and release the buffer
+  app_message_out_send();
+  app_message_out_release();
+}
+
+*/
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Message received!");
@@ -50,7 +86,34 @@ static void layer_update_callback(Layer *me, GContext* ctx) {
 
 }
 
+
+static void window_load(Window *window) {
+	// Init the layer for display the image
+  Layer *window_layer = window_get_root_layer(window);
+	//window_set_fullscreen(window, true);
+  GRect bounds = layer_get_frame(window_layer);
+  layer = layer_create(bounds);
+  layer_set_update_proc(layer, layer_update_callback);
+  layer_add_child(window_layer, layer);
+
+	//Draws the Image
+  image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_HOME);
+	
+}
+
+void send_int(uint8_t key, uint8_t cmd)
+{
+    DictionaryIterator *iter;
+    app_message_outbox_begin(&iter);
+      
+    Tuplet value = TupletInteger(key, cmd);
+    dict_write_tuplet(iter, &value);
+      
+    app_message_outbox_send();
+}
+
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+	send_int(KEY_BUTTON_EVENT, BUTTON_SELECT);
 	gbitmap_destroy(image);
 	layer_destroy(layer);
 	// Init the layer for display the image
@@ -66,6 +129,7 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+	send_int(KEY_BUTTON_EVENT, BUTTON_UP);
 	gbitmap_destroy(image);
 	layer_destroy(layer);
 	// Init the layer for display the image
@@ -81,6 +145,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+	send_int(KEY_BUTTON_EVENT, BUTTON_DOWN);
 	gbitmap_destroy(image);
 	layer_destroy(layer);
 	// Init the layer for display the image
@@ -101,28 +166,18 @@ static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
-static void window_load(Window *window) {
-	// Init the layer for display the image
-  Layer *window_layer = window_get_root_layer(window);
-	//window_set_fullscreen(window, true);
-  GRect bounds = layer_get_frame(window_layer);
-  layer = layer_create(bounds);
-  layer_set_update_proc(layer, layer_update_callback);
-  layer_add_child(window_layer, layer);
-
-	//Draws the Image
-  image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_HOME);
-	
-}
-
-
 static void init(void) {
+	
+	//Register AppMessage events
+	app_message_register_inbox_received(in_received_handler);           
+	app_message_open(512, 512);    //Large input and output buffer sizes
 	
 	// Register callbacks
 	app_message_register_inbox_received(inbox_received_callback);
 	app_message_register_inbox_dropped(inbox_dropped_callback);
 	app_message_register_outbox_failed(outbox_failed_callback);
 	app_message_register_outbox_sent(outbox_sent_callback);
+	
 	
 	//Open AppMessage
 	app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
