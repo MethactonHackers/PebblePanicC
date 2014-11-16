@@ -6,15 +6,15 @@ static GBitmap *image;
 static Layer *layer;
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
+	//image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-	image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
+	//image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-	image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
+	//image = gbitmap_create_with_resource(RESOURCE_ID_TEST_IMAGE);
 }
 
 static void click_config_provider(void *context) {
